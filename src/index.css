@@ -4,35 +4,35 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 240 30% 6%;
+    --foreground: 210 40% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 240 28% 9%;
+    --card-foreground: 210 40% 98%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 240 28% 9%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 160 84% 50%;
+    --primary-foreground: 240 30% 6%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 270 70% 60%;
+    --secondary-foreground: 210 40% 98%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 240 20% 16%;
+    --muted-foreground: 220 15% 60%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 320 90% 60%;
+    --accent-foreground: 210 40% 98%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 240 20% 18%;
+    --input: 240 20% 18%;
+    --ring: 160 84% 50%;
 
-    --radius: 0.5rem;
+    --radius: 0.85rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -96,6 +96,45 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+    background-image:
+      radial-gradient(
+        circle at 15% 20%,
+        hsl(160 84% 50% / 0.12),
+        transparent 40%
+      ),
+      radial-gradient(
+        circle at 85% 15%,
+        hsl(270 70% 60% / 0.14),
+        transparent 40%
+      ),
+      radial-gradient(
+        circle at 50% 90%,
+        hsl(320 90% 60% / 0.1),
+        transparent 45%
+      );
+    background-attachment: fixed;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent;
+  }
+  .glass {
+    background: hsl(240 28% 9% / 0.7);
+    backdrop-filter: blur(16px);
+    border: 1px solid hsl(240 20% 24% / 0.6);
+  }
+  .neon-border {
+    box-shadow:
+      0 0 0 1px hsl(var(--primary) / 0.4),
+      0 0 24px hsl(var(--primary) / 0.25);
+  }
+  .grid-bg {
+    background-image:
+      linear-gradient(hsl(240 20% 24% / 0.4) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(240 20% 24% / 0.4) 1px, transparent 1px);
+    background-size: 40px 40px;
   }
 }
