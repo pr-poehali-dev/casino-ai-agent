@@ -1,0 +1,22 @@
+{
+  "tests": [
+    {
+      "name": "Логин в казино",
+      "method": "POST",
+      "path": "/",
+      "body": {"action": "login", "login": "testuser", "password": "testpass", "casino_url": "https://pin-up.casino", "session_id": "sess_test01"},
+      "expectedStatus": 200,
+      "expectedBody": {"ok": true},
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Статус несуществующей сессии",
+      "method": "POST",
+      "path": "/",
+      "body": {"action": "status", "session_id": "nonexistent_xyz"},
+      "expectedStatus": 404,
+      "expectedBody": {"error": "Не найдено"},
+      "bodyMatcher": "partial"
+    }
+  ]
+}

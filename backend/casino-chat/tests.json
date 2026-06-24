@@ -1,0 +1,31 @@
+{
+  "tests": [
+    {
+      "name": "Вопрос о стратегии",
+      "method": "POST",
+      "path": "/",
+      "body": {"message": "расскажи про мартингейл", "session_id": ""},
+      "expectedStatus": 200,
+      "expectedBody": {"answer": "Мартингейл — удвоение ставки после каждого проигрыша. Плюс: быстрое отыгрывание потерь. Минус: требует большого банкролла, есть риск достичь лимита стола."},
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Приветствие",
+      "method": "POST",
+      "path": "/",
+      "body": {"message": "привет", "session_id": ""},
+      "expectedStatus": 200,
+      "expectedBody": {"answer": "Привет! Я ИИ-аналитик казино. Спрашивай о стратегиях, RTP, банкролле или текущей сессии — отвечу на всё!"},
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Пустой вопрос",
+      "method": "POST",
+      "path": "/",
+      "body": {"message": ""},
+      "expectedStatus": 400,
+      "expectedBody": {"error": "Пустой вопрос"},
+      "bodyMatcher": "partial"
+    }
+  ]
+}

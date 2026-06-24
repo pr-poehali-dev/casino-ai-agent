@@ -1,0 +1,31 @@
+{
+  "tests": [
+    {
+      "name": "Анализ по URL",
+      "method": "POST",
+      "path": "/",
+      "body": {"url": "https://pin-up.casino", "session_id": "test001"},
+      "expectedStatus": 200,
+      "expectedBody": {"casino": {"name": "Pin-Up Casino"}, "recommended_strategy": {}},
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Анализ по ID",
+      "method": "POST",
+      "path": "/",
+      "body": {"id": "1xbet", "session_id": "test002"},
+      "expectedStatus": 200,
+      "expectedBody": {"casino": {"rtp": 96.5}},
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Ошибка без параметров",
+      "method": "POST",
+      "path": "/",
+      "body": {},
+      "expectedStatus": 400,
+      "expectedBody": {"error": "Укажите URL или ID казино"},
+      "bodyMatcher": "partial"
+    }
+  ]
+}
