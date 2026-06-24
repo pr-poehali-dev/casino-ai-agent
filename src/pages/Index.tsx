@@ -201,21 +201,35 @@ const Index = () => {
 
         {/* RIGHT: live */}
         <div className="lg:col-span-3 space-y-6 animate-fade-in" style={{ animationDelay: '0.3s' }}>
-          <div className="glass rounded-2xl p-6 neon-border">
-            <div className="flex items-center justify-between mb-5">
-              <p className="text-sm text-muted-foreground">Баланс агента</p>
-              <span className={`text-xs px-2 py-1 rounded-full ${stats.profit >= 0 ? 'bg-primary/15 text-primary' : 'bg-destructive/15 text-destructive'}`}>
-                {stats.profit >= 0 ? '+' : ''}{Math.round(stats.profit)} ₽
+          <div className="relative overflow-hidden rounded-2xl p-6 neon-border bg-gradient-to-br from-[hsl(240_28%_11%)] to-[hsl(240_30%_7%)]">
+            <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-primary/20 blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-12 -left-8 w-36 h-36 rounded-full bg-secondary/20 blur-3xl pointer-events-none" />
+            <div className="relative flex items-center justify-between mb-3">
+              <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-primary">
+                <Icon name="Wallet" size={15} /> Casino Balance
+              </div>
+              <span className={`text-xs px-2.5 py-1 rounded-full flex items-center gap-1 ${stats.profit >= 0 ? 'bg-primary/15 text-primary' : 'bg-destructive/15 text-destructive'}`}>
+                <Icon name={stats.profit >= 0 ? 'ArrowUpRight' : 'ArrowDownRight'} size={12} />
+                {stats.profit >= 0 ? '+' : ''}{Math.round(stats.profit).toLocaleString('ru')} ₽
               </span>
             </div>
-            <p className="font-display font-bold text-5xl mb-6">{Math.round(balance).toLocaleString('ru')} <span className="text-2xl text-muted-foreground">₽</span></p>
-            <div className="grid grid-cols-3 gap-3">
+            <div className="relative flex items-baseline gap-2 mb-1">
+              <span className="font-display font-bold text-6xl tracking-tight text-gradient tabular-nums">
+                {Math.round(balance).toLocaleString('ru')}
+              </span>
+              <span className="font-display text-3xl text-muted-foreground">₽</span>
+            </div>
+            <p className="relative text-[11px] text-muted-foreground mb-6 flex items-center gap-1.5">
+              <Icon name="Chip" fallback="CircleDollarSign" size={13} className="text-accent" />
+              Игровой счёт · ставка {bet[0]} ₽ · {STRATEGIES.find((s) => s.id === strategy)?.name}
+            </p>
+            <div className="relative grid grid-cols-3 gap-3">
               {[
                 { l: 'Раундов', v: stats.rounds, c: 'text-foreground' },
                 { l: 'Винрейт', v: `${winRate}%`, c: 'text-primary' },
                 { l: 'Победы/Поражения', v: `${stats.wins}/${stats.losses}`, c: 'text-secondary' },
               ].map((m) => (
-                <div key={m.l} className="bg-muted/30 rounded-xl p-3 text-center border border-border/50">
+                <div key={m.l} className="bg-background/40 rounded-xl p-3 text-center border border-border/50 backdrop-blur-sm">
                   <p className={`font-display font-bold text-2xl ${m.c}`}>{m.v}</p>
                   <p className="text-[11px] text-muted-foreground">{m.l}</p>
                 </div>
